@@ -1,11 +1,3 @@
--- IT Blog — схема для Supabase (PostgreSQL)
--- Виконай у Supabase: SQL Editor → New query → встав цей файл → Run
--- Порядок: спочатку таблиці, потім RLS, потім Storage (в кінці файлу).
-
--- ---------------------------------------------------------------------------
--- Таблиці (public)
--- ---------------------------------------------------------------------------
-
 create table if not exists public.users (
   id uuid primary key references auth.users (id) on delete cascade,
   slug text not null unique,
@@ -61,8 +53,6 @@ create index if not exists idx_articles_author_id on public.articles (author_id)
 create index if not exists idx_articles_slug on public.articles (slug);
 
 -- ---------------------------------------------------------------------------
--- Оновлення updated_at
--- ---------------------------------------------------------------------------
 
 create or replace function public.set_updated_at ()
 returns trigger
@@ -86,9 +76,6 @@ before update on public.articles
 for each row
 execute procedure public.set_updated_at ();
 
--- ---------------------------------------------------------------------------
--- Row Level Security (читання з фронту через anon key)
--- Запис статей/категорій — лише через бекенд (service_role), він обходить RLS.
 -- ---------------------------------------------------------------------------
 
 alter table public.users enable row level security;
@@ -130,8 +117,6 @@ create policy "article_tags_select_published" on public.article_tags
   );
 
 -- ---------------------------------------------------------------------------
--- Storage: bucket "images" (обкладинки; бекенд завантажує через service_role)
--- ---------------------------------------------------------------------------
 
 insert into storage.buckets (id, name, public)
 values ('images', 'images', true)
@@ -142,24 +127,3 @@ create policy "images_public_read"
   on storage.objects for select
   to public
   using (bucket_id = 'images');
-
--- Завантаження з бекенду (service_role) RLS не застосовує; для додаткового захисту
--- можна додати policy лише для authenticated — тоді лише service_role зможе писати.
-
--- ---------------------------------------------------------------------------
--- Перший адміністратор (після реєстрації в Authentication)
--- ---------------------------------------------------------------------------
--- 1) Authentication → Users → скопіюй UUID користувача.
--- 2) Виконай (підстав свій uuid та бажаний slug):
---
--- insert into public.users (id, slug, name, is_admin)
--- values (
---   'PASTE_AUTH_USER_UUID',
---   'admin',
---   'Admin',
---   true
--- )
--- on conflict (id) do update set is_admin = true, name = excluded.name, slug = excluded.slug;
---
--- Якщо рядок уже створено тригером/бекендом — лише:
--- update public.users set is_admin = true where id = 'PASTE_AUTH_USER_UUID';

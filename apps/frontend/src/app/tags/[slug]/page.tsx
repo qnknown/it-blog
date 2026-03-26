@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const tag = tags.find((t) => t.slug === slug);
     if (!tag) return { title: "Тег" };
     return {
-      title: `Тег «${tag.name}» | IT Blog`,
+      title: `Тег «${tag.name}» | Code IT`,
       description: `Статті з тегом ${tag.name}`,
     };
   } catch {

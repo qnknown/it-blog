@@ -37,6 +37,9 @@ export function SiteFooter() {
             Ресурси
           </span>
           <div className="flex flex-col gap-2 font-semibold">
+            <Link href="/about" className="hover:text-[var(--accent)] transition-colors">
+              Про нас
+            </Link>
             <Link href="/rss.xml" className="hover:text-[var(--accent)] transition-colors">
               RSS Feed
             </Link>

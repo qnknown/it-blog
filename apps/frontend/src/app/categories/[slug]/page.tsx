@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const cat = cats.find((c) => c.slug === slug);
     if (!cat) return { title: "Категорія" };
     return {
-      title: `${cat.name} | IT Blog`,
+      title: `${cat.name} | Code IT`,
       description: cat.description || `Статті в категорії «${cat.name}»`,
     };
   } catch {

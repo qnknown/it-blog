@@ -13,12 +13,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    default: "IT Blog",
-    template: "%s | IT Blog",
+    default: "Code IT",
+    template: "%s | Code IT",
   },
   description: "Новинний блог про інформаційні технології: фронтенд, бекенд, DevOps, ШІ та безпеку.",
   openGraph: {
-    siteName: "IT Blog",
+    siteName: "Code IT",
     locale: "uk_UA",
     type: "website",
   },

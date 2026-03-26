@@ -22,6 +22,8 @@ export type Author = {
   name: string;
   bio?: string | null;
   avatar_url?: string | null;
+  profile_url?: string | null;
+  published_articles?: number;
 };
 
 export type Tag = {

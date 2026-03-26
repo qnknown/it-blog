@@ -8,11 +8,11 @@ import type { ArticleListItem, Category, PaginationMeta } from "@/lib/types";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "IT Blog — новини про інформаційні технології",
+  title: "Code IT — новини про інформаційні технології",
   description:
     "Новинний блог про JavaScript, backend, DevOps, ШІ, кібербезпеку та інструменти розробки.",
   openGraph: {
-    title: "IT Blog",
+    title: "Code IT",
     description: "Новини та статті про IT",
     type: "website",
   },
@@ -44,7 +44,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
           <div className="max-w-3xl">
             <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-light)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-[var(--accent)] dark:bg-[var(--accent)]/10">
               <span className="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
-              CodeIT Blog
+              Code IT
             </span>
             <h1 className="text-5xl font-black tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-6xl md:text-7xl">
               Останні публікації.

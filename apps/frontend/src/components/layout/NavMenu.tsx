@@ -37,6 +37,9 @@ export function NavMenu({ categories }: NavMenuProps) {
         <Link href="/search" onClick={handleLinkClick} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
           Пошук
         </Link>
+        <Link href="/about" onClick={handleLinkClick} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          Про нас
+        </Link>
 
         {categories.length > 0 && (
           <div className="relative" ref={dropdownRef}>
@@ -111,6 +114,9 @@ export function NavMenu({ categories }: NavMenuProps) {
             </Link>
             <Link href="/search" onClick={handleLinkClick} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
               Пошук
+            </Link>
+            <Link href="/about" onClick={handleLinkClick} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
+              Про нас
             </Link>
 
             {categories.length > 0 && (

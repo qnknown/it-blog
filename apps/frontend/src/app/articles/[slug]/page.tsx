@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { data: article } = await fetchJsonNoStore<{ data: ArticleDetail }>(
       `/articles/${encodeURIComponent(slug)}`
     );
-    const title = `${article.title} | IT Blog`;
+    const title = `${article.title} | Code IT`;
     const desc = article.excerpt || article.title;
     const url = `${getSiteUrl()}/articles/${article.slug}`;
     return {
@@ -117,14 +117,44 @@ export default async function ArticlePage({ params }: Props) {
 
         <h1 className="mt-2 text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{article.title}</h1>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
-          {author && (
-            <Link href={`/authors/${author.slug}`} className="font-medium hover:text-[var(--accent)]">
-              {author.name}
-            </Link>
-          )}
-          <time dateTime={article.published_at || undefined}>{formatDate(article.published_at)}</time>
-          <span>👁 {article.views ?? 0} переглядів</span>
+        <div className="mt-6 rounded-2xl border border-zinc-200/70 bg-zinc-50/70 p-4 dark:border-zinc-800/80 dark:bg-zinc-900/60">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+              {author?.avatar_url ? (
+                <Image src={author.avatar_url} alt={author.name} fill className="object-cover" sizes="56px" />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-lg font-bold text-zinc-500 dark:text-zinc-400">
+                  {(author?.name || "?").charAt(0).toUpperCase()}
+                </div>
+              )}
+            </div>
+
+            <div className="min-w-0 flex-1">
+              {author ? (
+                <Link href={`/authors/${author.slug}`} className="text-base font-semibold text-zinc-900 hover:text-cyan-600 dark:text-zinc-100">
+                  {author.name}
+                </Link>
+              ) : (
+                <span className="text-base font-semibold text-zinc-900 dark:text-zinc-100">Редакція Code IT</span>
+              )}
+
+              {author?.bio && (
+                <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{author.bio}</p>
+              )}
+
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                <span>
+                  Опубліковано:{" "}
+                  <time dateTime={article.published_at || undefined}>{formatDate(article.published_at)}</time>
+                </span>
+                <span>
+                  Оновлено:{" "}
+                  <time dateTime={article.updated_at || undefined}>{formatDate(article.updated_at || article.published_at)}</time>
+                </span>
+                <span>👁 {article.views ?? 0} переглядів</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {article.cover_url && (

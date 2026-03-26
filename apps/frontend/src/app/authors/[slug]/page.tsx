@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       next: { revalidate: 3600 },
     });
     return {
-      title: `${author.name} | IT Blog`,
+      title: `${author.name} | Code IT`,
       description: author.bio || `Статті автора ${author.name}`,
     };
   } catch {
@@ -74,6 +74,19 @@ export default async function AuthorPage({ params, searchParams }: Props) {
         <div>
           <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{author.name}</h1>
           {author.bio && <p className="mt-3 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">{author.bio}</p>}
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
+            <span>Опубліковано: {author.published_articles ?? meta.total}</span>
+            {author.profile_url && (
+              <a
+                href={author.profile_url}
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-cyan-600 hover:underline"
+              >
+                Профіль автора (LinkedIn / GitHub)
+              </a>
+            )}
+          </div>
         </div>
       </header>
 

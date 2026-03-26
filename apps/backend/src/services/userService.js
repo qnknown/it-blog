@@ -2,18 +2,25 @@ import { supabase } from '../supabase/client.js';
 import { supabaseAdmin } from '../supabase/admin.js';
 import { uniqueSlug } from './slugService.js';
 
-const userPublic = 'id, slug, name, bio, avatar_url, created_at';
+const userPublic = 'id, slug, name, bio, avatar_url, profile_url, created_at';
 
 export async function getAuthorBySlug(slug) {
   const { data, error } = await supabase.from('users').select(userPublic).eq('slug', slug).maybeSingle();
   if (error) throw error;
-  return data;
+  if (!data) return null;
+  const { count, error: cErr } = await supabase
+    .from('articles')
+    .select('id', { count: 'exact', head: true })
+    .eq('author_id', data.id)
+    .eq('status', 'published');
+  if (cErr) throw cErr;
+  return { ...data, published_articles: count ?? 0 };
 }
 
 export async function listUsersAdmin() {
   const { data, error } = await supabaseAdmin
     .from('users')
-    .select('id, slug, name, bio, avatar_url, is_admin, created_at')
+    .select('id, slug, name, bio, avatar_url, profile_url, is_admin, created_at')
     .order('name');
   if (error) throw error;
   return data || [];

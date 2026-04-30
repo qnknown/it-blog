@@ -51,11 +51,11 @@ export function ArticleCard({ article }: { article: ArticleListItem }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-zinc-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[var(--accent)]/10 hover:ring-[var(--accent)]/20 dark:bg-zinc-900/80 dark:ring-zinc-100/10 dark:hover:shadow-[var(--accent)]/20 dark:hover:ring-[var(--accent)]/30">
-      <Link href={`/articles/${article.slug}`} className="relative aspect-[16/9] w-full overflow-hidden">
+      <Link href={`/articles/${article.slug}`} className="relative aspect-[16/9] w-full overflow-hidden" aria-label={article.title}>
         {article.cover_url ? (
           <Image
             src={article.cover_url}
-            alt=""
+            alt={article.title}
             fill
             className="object-cover transition duration-500 group-hover:scale-[1.05]"
             sizes="(max-width:768px) 100vw, 33vw"

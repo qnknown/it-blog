@@ -32,20 +32,42 @@ export function SiteFooter() {
           <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">© {new Date().getFullYear()} Code IT</p>
         </div>
 
-        <div className="flex flex-col gap-3">
-          <span className="text-xs font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-600">
-            Ресурси
-          </span>
-          <div className="flex flex-col gap-2 font-semibold">
-            <Link href="/about" className="hover:text-[var(--accent)] transition-colors">
-              Про нас
-            </Link>
-            <Link href="/rss.xml" className="hover:text-[var(--accent)] transition-colors">
-              RSS Feed
-            </Link>
-            <Link href="/sitemap.xml" className="hover:text-[var(--accent)] transition-colors">
-              Site map
-            </Link>
+        <div className="flex gap-12 sm:gap-16">
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-600">
+              Популярні теги
+            </span>
+            <div className="flex flex-col gap-2 font-semibold">
+              <Link href="/tags/javascript" className="hover:text-[var(--accent)] transition-colors">
+                JavaScript
+              </Link>
+              <Link href="/tags/react" className="hover:text-[var(--accent)] transition-colors">
+                React
+              </Link>
+              <Link href="/tags/nextjs" className="hover:text-[var(--accent)] transition-colors">
+                Next.js
+              </Link>
+              <Link href="/tags/typescript" className="hover:text-[var(--accent)] transition-colors">
+                TypeScript
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-600">
+              Ресурси
+            </span>
+            <div className="flex flex-col gap-2 font-semibold">
+              <Link href="/about" className="hover:text-[var(--accent)] transition-colors">
+                Про нас
+              </Link>
+              <Link href="/rss.xml" className="hover:text-[var(--accent)] transition-colors">
+                RSS Feed
+              </Link>
+              <Link href="/sitemap.xml" className="hover:text-[var(--accent)] transition-colors">
+                Site map
+              </Link>
+            </div>
           </div>
         </div>
       </div>

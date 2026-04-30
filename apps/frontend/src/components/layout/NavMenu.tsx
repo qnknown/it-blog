@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { Category } from "@/lib/types";
 
 interface NavMenuProps {
@@ -12,6 +13,7 @@ export function NavMenu({ categories }: NavMenuProps) {
   const [catOpen, setCatOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function handler(e: MouseEvent) {
@@ -31,13 +33,13 @@ export function NavMenu({ categories }: NavMenuProps) {
   return (
     <>
       <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
-        <Link href="/" onClick={handleLinkClick} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        <Link href="/" onClick={handleLinkClick} aria-current={pathname === "/" ? "page" : undefined} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
           Головна
         </Link>
-        <Link href="/search" onClick={handleLinkClick} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        <Link href="/search" onClick={handleLinkClick} aria-current={pathname === "/search" ? "page" : undefined} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
           Пошук
         </Link>
-        <Link href="/about" onClick={handleLinkClick} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+        <Link href="/about" onClick={handleLinkClick} aria-current={pathname === "/about" ? "page" : undefined} className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
           Про нас
         </Link>
 
@@ -70,6 +72,7 @@ export function NavMenu({ categories }: NavMenuProps) {
                       key={c.id}
                       href={`/categories/${c.slug}`}
                       onClick={handleLinkClick}
+                      aria-current={pathname === `/categories/${c.slug}` ? "page" : undefined}
                       className="px-3 py-2 rounded-lg text-sm text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors"
                     >
                       {c.name}
@@ -109,13 +112,13 @@ export function NavMenu({ categories }: NavMenuProps) {
       {mobileOpen && (
         <div className="md:hidden absolute inset-x-0 top-full z-40 border-b border-zinc-200 bg-white/97 backdrop-blur-sm shadow-lg dark:border-zinc-800 dark:bg-zinc-950/97 animate-fade-in-down">
           <div className="mx-auto max-w-6xl px-4 py-4 flex flex-col gap-1">
-            <Link href="/" onClick={handleLinkClick} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
+            <Link href="/" onClick={handleLinkClick} aria-current={pathname === "/" ? "page" : undefined} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
               Головна
             </Link>
-            <Link href="/search" onClick={handleLinkClick} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
+            <Link href="/search" onClick={handleLinkClick} aria-current={pathname === "/search" ? "page" : undefined} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
               Пошук
             </Link>
-            <Link href="/about" onClick={handleLinkClick} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
+            <Link href="/about" onClick={handleLinkClick} aria-current={pathname === "/about" ? "page" : undefined} className="px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors">
               Про нас
             </Link>
 
@@ -129,6 +132,7 @@ export function NavMenu({ categories }: NavMenuProps) {
                     key={c.id}
                     href={`/categories/${c.slug}`}
                     onClick={handleLinkClick}
+                    aria-current={pathname === `/categories/${c.slug}` ? "page" : undefined}
                     className="px-3 py-2.5 rounded-lg text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800 transition-colors"
                   >
                     {c.name}

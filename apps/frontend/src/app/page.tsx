@@ -42,6 +42,9 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
       <header className="mb-12 border-b-2 border-zinc-200/60 pb-10 dark:border-zinc-800/60">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl">
+            <div className="mb-3 text-2xl font-black uppercase tracking-[0.3em] text-red-600 dark:text-red-500">
+              ХУЙ
+            </div>
             <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-light)] px-3 py-1 text-xs font-bold uppercase tracking-widest text-[var(--accent)] dark:bg-[var(--accent)]/10">
               <span className="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
               Code IT
